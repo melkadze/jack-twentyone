@@ -1,0 +1,27 @@
+{
+  "name": "api-project-melkadze",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/staten-island-tech/api-project-melkadze.git"
+  },
+  "bugs": {
+    "url": "https://github.com/staten-island-tech/api-project-melkadze/issues"
+  },
+  "homepage": "https://github.com/staten-island-tech/api-project-melkadze#readme",
+  "description": ""
+}

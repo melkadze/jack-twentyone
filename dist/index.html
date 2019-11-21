@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Sriracha&display=swap" rel="stylesheet">
+    <title>Dictionary Database</title>
+    <link rel="icon" href="favicon.ico" sizes="16x16" type="image/png">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1 class="banner">Dictionary Database</h1>
+        <form id="word-form" class="user-input">
+            <div class="user-search">
+                <h2 class="user-search-banner">Lookup</h2>
+                <textarea id="word-input" class="nes-textarea" placeholder="Search for a Word..."></textarea>
+                <div>
+                    <input type="submit" value="Submit" class="nes-btn">
+                </div>
+            </div>
+        </form>
+        <div class="display">
+            <div>
+                <h1 class="displaySubhead" id="display-head-word">  </h1>
+                <p id="display-word"></p>
+            </div>
+            <div>
+                <h1 class="displaySubhead" id="display-head-definition"></h1>
+                <p class="definition" id="display-definition"></p>
+                <p class="definition" id="display-definition-1"></p>
+                <p class="definition" id="display-definition-2"></p>
+                <p class="definition" id="display-definition-3"></p>
+                <p class="definition" id="display-definition-4"></p>
+            </div>
+            <div>
+                <h1 class="displaySubhead" id="display-head-origin"></h1>
+                <p id="display-origin"></p>
+            </div>
+            <div>
+                <h1 class="displaySubhead" id="display-head-part"></h1>
+                <p id="display-part"></p>
+            </div>
+            <div>
+                <h1 class="displaySubhead" id="display-head-pronunciation"></h1>
+                <p id="display-pronunciation"></p>
+            </div>
+            <div>
+                <h1 class="displaySubhead" id="display-head-synonyms"></h1>
+                <p id="display-synonyms"></p>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="main.js"></script></body>
+
+</html>
