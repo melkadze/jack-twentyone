@@ -1,6 +1,4 @@
-let deck = [];
-
-function addToDeck(suit) {
+export function add(suit) {
   for (let i = 1; i < 14; i++) {
     if (i === 1) {
       deck.push(['A', suit])
@@ -16,24 +14,27 @@ function addToDeck(suit) {
   }
 }
 
-function createDeck() {
+export function create() {
   addToDeck('S');
   addToDeck('C');
   addToDeck('H');
   addToDeck('D');
 }
 
-function removeCard(index){
+export function removeCard(index){
   deck.splice(index, 1);
 }
 
-function drawCard() {
-  
-}
 
-createDeck();
+//import { add, create, removeCard } from "./deck";
 
-console.log(deck[7])
-removeCard(7);
+/*
+DOMStrings.input.addEventListener("keypress", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.querySelector(".nes-btn").click();
+  }
+});
 
-console.log(deck)
+getWordInfo();
+*/
