@@ -27,13 +27,16 @@ function removeCard(index){
   deck.splice(index, 1);
 }
 
+function randomCard() {
+ console.log(deck[Math.floor(Math.random() * deck.length)])
+}
+
 function drawCard() {
   
 }
 
 createDeck();
-
-console.log(deck[7])
+randomCard();
 removeCard(7);
 
 console.log(deck)
