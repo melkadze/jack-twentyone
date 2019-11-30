@@ -52,15 +52,25 @@ let Game = {
   dealerHand: [],
   playerHand: [],
 
+  getHandValue: function(hand){
+    let acc = 0;
+    for(let i = hand.length - 1; i > -1; i--){
+      acc += hand[i][2];
+    }
+    return acc;
+    //add case for ace
+  },
+
   dealerDraw: function(){
     dealerHand = [Deck.drawCard(), Deck.drawCard()]
-    console.log(`The dealer has drawn a ${dealerHand[0][0]} of ${dealerHand[0][1]} and a ${dealerHand[1][0]} of ${dealerHand[1][1]}. Letting you know the second one is a cheat.`)
+    console.log(`The dealer has drawn a ${dealerHand[0][0]} of ${dealerHand[0][1]} and a ${dealerHand[1][0]} of ${dealerHand[1][1]}. Their hand is worth ${Game.getHandValue(dealerHand)}`)
+    console.log(`If you are not debugging this app, kindly forget the second card.`);
   },
 
   playerDraw: function(){
     playerHand = [Deck.drawCard(), Deck.drawCard()]
-    console.log(`You have drawn a ${playerHand[0][0]} of ${playerHand[0][1]} and a ${playerHand[1][0]} of ${playerHand[1][1]}. `)
-    console.log(`Hit or stay?`)
+    console.log(`You have drawn a ${playerHand[0][0]} of ${playerHand[0][1]} and a ${playerHand[1][0]} of ${playerHand[1][1]}. Your hand is worth ${Game.getHandValue(playerHand)}.`)
+    console.log(`Will you "hit" or "stay"?`)
   },
 
   init: function() {
@@ -69,6 +79,19 @@ let Game = {
     Game.playerDraw();
   }
 }
+
+
+document.getElementById("word-form").addEventListener("submit",function(e) {
+  e.preventDefault();
+  if(document.getElementById("word-input").value == `hit`) {
+    console.log(`You choose to hit.`);
+  }
+  if(document.getElementById("word-input").value == `stay`) {
+    console.log(`You chose to stay, but this hasn't been programmed yet. Wow.`);
+  }
+});
+
+
 
 Game.init();
 Deck.drawCard();
