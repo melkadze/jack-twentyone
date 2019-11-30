@@ -10,13 +10,13 @@ let Deck = {
     //2 index is card value (1, 9, 10) [1 will be tried as both 1 and 11]
     for (let i = 1; i < 14; i++) {
       if (i === 1) {
-        Deck.deck.push(['A', suit, 1])
+        Deck.deck.push(['Ace', suit, 1])
       } else if (i === 11) {
-        Deck.deck.push(['J', suit, 10])
+        Deck.deck.push(['Jack', suit, 10])
       } else if (i === 12) {
-        Deck.deck.push(['Q', suit, 10])
+        Deck.deck.push(['Queen', suit, 10])
       } else if (i === 13) {
-        Deck.deck.push(['K', suit, 10])
+        Deck.deck.push(['King', suit, 10])
       } else {
         Deck.deck.push([`${i}`, suit, i])
       }
@@ -28,10 +28,10 @@ let Deck = {
   },
 
   createDeck: function() {
-    Deck.addToDeck('S');
-    Deck.addToDeck('C');
-    Deck.addToDeck('H');
-    Deck.addToDeck('D');
+    Deck.addToDeck('Spades');
+    Deck.addToDeck('Clubs');
+    Deck.addToDeck('Hearts');
+    Deck.addToDeck('Diamonds');
   },
 
   randomCard: function() {
@@ -73,7 +73,7 @@ let Game = {
   },
 
   dealerDraw: function(){
-    dealerHand = [Deck.drawCard(), Deck.drawCard(), Deck.drawCard()];
+    dealerHand = [Deck.drawCard(), Deck.drawCard()];
     console.log(`The dealer has drawn a ${dealerHand[0][0]} of ${dealerHand[0][1]} and a ${dealerHand[1][0]} of ${dealerHand[1][1]}. Their hand is worth ${Game.getHandValue(dealerHand)}.`)
     console.log(`If you are not debugging this app, kindly forget the second card.`);
   },
@@ -84,28 +84,97 @@ let Game = {
     console.log(`Will you "hit" or "stay"?`)
   },
 
-  init: function() {
+  //make all of these compressed (reuse) [or dont bc will have to modify DOMStrings]
+
+  playerHit: function(){
+    playerHand.push(Deck.drawCard());
+  },
+
+  dealerHit: function(){
+    dealerHand.push(Deck.drawCard());
+  },
+
+  playerTestBust: function(){
+    return Game.getHandValue(playerHand) > 21;
+  },
+
+  dealerTestBust: function(){
+    return Game.getHandValue(dealerHand) > 21;
+  },
+
+  playerBust: function(){
+    console.log(`You bust; you lose! Refresh to play again!`)
+  },
+
+  dealerBust: function(){
+    console.log(`Dealer bust; you win! Refresh to play again!`)
+  },
+
+  playerTurn: function(){
+    document.getElementById("word-form").addEventListener("submit",function(e) {
+    e.preventDefault();
+    if(document.getElementById("word-input").value == `hit`) {
+      document.getElementById("word-input").value = '';
+        Game.playerHit();
+        console.log(`When you hit, you drew a ${playerHand[(playerHand.length - 1)][0]} of ${playerHand[(playerHand.length - 1)][1]}. Your hand is worth ${Game.getHandValue(playerHand)}.`);
+        if(Game.playerTestBust() == false){
+          console.log(`Will you "hit" or "stay"?`);
+          Game.playerTurn();
+        } else {
+          Game.playerBust();
+        }
+    }
+    if(document.getElementById("word-input").value == `stay`) {
+      document.getElementById("word-input").value = '';
+      console.log(`You chose to stay. It's now the dealer's turn.`);
+      Game.dealerTurn();
+      return;
+    }
+  });
+  },
+
+  dealerTurn: function(){
+    console.log(`The dealer currently has a ${dealerHand[0][0]} of ${dealerHand[0][1]} and a ${dealerHand[1][0]} of ${dealerHand[1][1]}. Their hand is worth ${Game.getHandValue(dealerHand)}.`);
+    while (Game.getHandValue(dealerHand) < 17) {
+      Game.dealerHit();
+      console.log(`When the dealer hit, they drew a ${dealerHand[(dealerHand.length - 1)][0]} of ${dealerHand[(dealerHand.length - 1)][1]}. Their hand is worth ${Game.getHandValue(dealerHand)}.`);
+    }
+    if(Game.dealerTestBust() == false){
+      console.log(`The dealer stays!`)
+      Game.testWinner();
+      return;
+    } else {
+      Game.dealerBust();
+    }
+  },
+
+  testWinner: function(){
+    //at this point, no player busts
+    console.log(`Since the dealer got ${Game.getHandValue(dealerHand)} and you got ${Game.getHandValue(playerHand)}...`)
+    if (Game.getHandValue(dealerHand) < Game.getHandValue(playerHand)) {
+      console.log(`You win!`)
+    } else if (Game.getHandValue(dealerHand) > Game.getHandValue(playerHand)) {
+      console.log(`You lose!`)
+    } else {
+      console.log(`You tie!`)
+    }
+    return;
+  },
+
+  end: function(){
+    //put a function here if required for cleanup
+  },
+
+  init: function(){
     Deck.createDeck();
     Game.dealerDraw();
     Game.playerDraw();
-    //cannot bust before this
+    Game.playerTurn();
+    Game.end();
   }
 }
 
-
-document.getElementById("word-form").addEventListener("submit",function(e) {
-  e.preventDefault();
-  if(document.getElementById("word-input").value == `hit`) {
-    console.log(`You choose to hit.`);
-  }
-  if(document.getElementById("word-input").value == `stay`) {
-    console.log(`You chose to stay, but this hasn't been programmed yet. Wow.`);
-  }
-});
-
-
-
 Game.init();
-Deck.drawCard();
 
-console.log(Deck.deck)
+//console.log(Deck.deck)
+////fix Game. to maybe nothing or this.
