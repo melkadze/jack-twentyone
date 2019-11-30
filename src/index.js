@@ -7,10 +7,10 @@ let Deck = {
     //deck array guide:
     //0 index is card number (10, J, Q)
     //1 index is suite (H, S, C)
-    //2 index is card value (9, 10, 11) [11 will be tried as both 1 and 11]
+    //2 index is card value (1, 9, 10) [1 will be tried as both 1 and 11]
     for (let i = 1; i < 14; i++) {
       if (i === 1) {
-        Deck.deck.push(['A', suit, 11])
+        Deck.deck.push(['A', suit, 1])
       } else if (i === 11) {
         Deck.deck.push(['J', suit, 10])
       } else if (i === 12) {
@@ -54,16 +54,27 @@ let Game = {
 
   getHandValue: function(hand){
     let acc = 0;
+    let numAces = 0;
     for(let i = hand.length - 1; i > -1; i--){
       acc += hand[i][2];
+      //only catches aces
+      if (hand[i][2] == 1) {
+        numAces++;
+      }
+    }
+    //occurs after so as to not prioritize aces over other cards (like having point total of 8, getting ace making it 19, and then busting after getting a 6)
+    while (numAces > 0) {
+      if (acc < 12) {
+        acc += 10;
+      }
+      numAces--
     }
     return acc;
-    //add case for ace
   },
 
   dealerDraw: function(){
-    dealerHand = [Deck.drawCard(), Deck.drawCard()]
-    console.log(`The dealer has drawn a ${dealerHand[0][0]} of ${dealerHand[0][1]} and a ${dealerHand[1][0]} of ${dealerHand[1][1]}. Their hand is worth ${Game.getHandValue(dealerHand)}`)
+    dealerHand = [Deck.drawCard(), Deck.drawCard(), Deck.drawCard()];
+    console.log(`The dealer has drawn a ${dealerHand[0][0]} of ${dealerHand[0][1]} and a ${dealerHand[1][0]} of ${dealerHand[1][1]}. Their hand is worth ${Game.getHandValue(dealerHand)}.`)
     console.log(`If you are not debugging this app, kindly forget the second card.`);
   },
 
@@ -77,6 +88,7 @@ let Game = {
     Deck.createDeck();
     Game.dealerDraw();
     Game.playerDraw();
+    //cannot bust before this
   }
 }
 
