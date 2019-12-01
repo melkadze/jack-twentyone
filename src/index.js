@@ -1,3 +1,21 @@
+////temporary console log code
+//borrowed from stack overflow; don't mind the vars
+
+(function () {
+  var old = console.log;
+  var logger = document.getElementById('log');
+  console.log = function () {
+    for (var i = 0; i < arguments.length; i++) {
+      if (typeof arguments[i] == 'object') {
+          logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + '<br />';
+      } else {
+          logger.innerHTML += arguments[i] + '<br />';
+      }
+    }
+  }
+})();
+
+
 //need let here for deck var
 let Deck = {
   //Deck (capital) is object, deck (lowercase) is current deck var
@@ -74,8 +92,7 @@ let Game = {
 
   dealerDraw: function(){
     dealerHand = [Deck.drawCard(), Deck.drawCard()];
-    console.log(`The dealer has drawn a ${dealerHand[0][0]} of ${dealerHand[0][1]} and a ${dealerHand[1][0]} of ${dealerHand[1][1]}. Their hand is worth ${Game.getHandValue(dealerHand)}.`)
-    console.log(`If you are not debugging this app, kindly forget the second card.`);
+    console.log(`The dealer has drawn a ${dealerHand[0][0]} of ${dealerHand[0][1]} and a second, hidden card.`)
   },
 
   playerDraw: function(){
@@ -103,14 +120,20 @@ let Game = {
   },
 
   playerBust: function(){
-    console.log(`You bust; you lose! Refresh to play again!`)
+    console.log(`You bust; you lose! Type "replay" to play again!`)
   },
 
   dealerBust: function(){
-    console.log(`Dealer bust; you win! Refresh to play again!`)
+    console.log(`Dealer bust; you win! Type "replay" to play again!`)
   },
 
   playerTurn: function(){
+    document.getElementById("word-form").addEventListener("keypress", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.querySelector(".nes-btn").click();
+    }
+  });
     document.getElementById("word-form").addEventListener("submit",function(e) {
     e.preventDefault();
     if(document.getElementById("word-input").value == `hit`) {
@@ -128,6 +151,12 @@ let Game = {
       document.getElementById("word-input").value = '';
       console.log(`You chose to stay. It's now the dealer's turn.`);
       Game.dealerTurn();
+      return;
+    }
+    if(document.getElementById("word-input").value == `replay`) {
+      document.getElementById("word-input").value = '';
+      console.log(`Reloading game...`);
+      location.reload();
       return;
     }
   });
