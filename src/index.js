@@ -266,3 +266,4 @@ Game.init();
 ///add case for natural blackjack
 //remove console logs & end funct
 //prettier
+//case for empty deck
