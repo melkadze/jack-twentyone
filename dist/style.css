@@ -109,6 +109,7 @@ body {
 .flexV {
   display: flex;
   flex-direction: column;
+  border-radius: 5px;
 }
 
 .shownCard{
@@ -149,6 +150,7 @@ body {
 }
 
 .cardImg{
+  border-radius: 10px;
   transition: all 0.2s;
 }
 
