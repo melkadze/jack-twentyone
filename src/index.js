@@ -260,6 +260,9 @@ Game.init();
 
 
 //console.log(Deck.deck)
+
+
 ////fix Game. to maybe nothing or this.
 ///add case for natural blackjack
 //remove console logs & end funct
+//prettier

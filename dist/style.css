@@ -2,9 +2,6 @@
   font-family: "Product Sans";
   font-style: normal;
   font-weight: 400;
-  /* this is a weird way to do fonts,
-    but it's the only way I've found to use
-    google's product sans */
   src: local("Open Sans"), local("OpenSans"),
     url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2)
       format("woff2");
@@ -15,7 +12,7 @@ html {
 }
 
 body {
-  background-image: linear-gradient(to bottom, #373b44, #4286f4);
+  background-color: #477148;
 }
 
 *,
@@ -28,72 +25,28 @@ body {
 }
 
 .wrapper {
-  filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.384));
+  filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.4));
+  
 }
 
 .banner {
-  text-align: center;
-  margin: 0 auto;
   padding-top: 0.75rem;
-  color: white;
-  background-color: #fe8a71;
   height: 15vh;
-  font-size: 6vh;
-  text-transform: uppercase;
-  letter-spacing: 1rem;
-  -webkit-clip-path: polygon(
-    50% 0%,
-    100% 25%,
-    100% 75%,
-    50% 100%,
-    0% 75%,
-    0% 25%
-  );
-  clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
+  background-color: burlywood;
+  margin: auto;
   margin-top: 2%;
 }
 
-.user-search {
-  text-transform: uppercase;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  height: 25vh;
-  filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.384));
-}
-
-.user-search-banner {
-  margin-bottom: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.bannerText {
+  font-size: 8vh;
   text-align: center;
-  background-color: #fe8a71;
-  width: 30vw;
-  height: 6vh;
-  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  text-transform: uppercase;
+  letter-spacing: 1rem;
+  margin: auto;
+  color: white;
 }
 
-#word-form {
-  margin-top: 10rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 2.2rem;
-}
 
-.word-form-input {
-  color: whitesmoke;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  height: 10vh;
-}
 
 .nes-btn,
 .nes-btn:link,
@@ -137,57 +90,15 @@ body {
 }
 
 
-.displaySubhead {
-  display: block;
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-  margin-top: 3vh;
-}
-
-.nes-textarea {
-  width: 40%;
-  height: 5vw;
-  font-size: 3vw;
-  background-color: lightblue;
-  border-radius: 1rem;
-  text-align: center;
-  text-transform: uppercase;
-  align-content: center;
-  color: #fe8a71;
-  overflow: hidden;
-}
-
-
-
 @media only screen and (max-width: 1080px) and (orientation: portrait) {
-  .user-search {
-    height: 30vh;
-  }
-
-  .banner {
+  .bannerText {
     font-size: 5vh;
   }
-
-  .user-search-banner {
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    width: 60vw;
-    height: 8vh;
-    font-size: 4vh;
-  }
-  
-  .nes-textarea {
-    width: 75%;
-    height: 25vh;
-    font-size: 3vh;
-    border-radius: 0.5rem;
-  }
 }
 
 
 
-/* replace everything above this line, especially buttons */
+/* replace buttons */
 
 
 .flexH {
@@ -235,4 +146,13 @@ body {
 
 .tie{
   background-color: gold;
+}
+
+.cardImg{
+  transition: all 0.2s;
+}
+
+.cardImg:hover{
+  transform: translateY(-1.5rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0.2);
 }
