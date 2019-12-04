@@ -1,24 +1,3 @@
-////temporary console log code
-//borrowed from stack overflow; don't mind the vars
-
-
-/*
-(function () {
-  var old = console.log;
-  var logger = document.getElementById('log');
-  console.log = function () {
-    for (var i = 0; i < arguments.length; i++) {
-      if (typeof arguments[i] == 'object') {
-          logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + '<br />';
-      } else {
-          logger.innerHTML += arguments[i] + '<br />';
-      }
-    }
-  }
-})();
-*/
-
-
 //need let here for deck var
 let Deck = {
   //Deck (capital) is object, deck (lowercase) is current deck var
@@ -113,7 +92,7 @@ let Game = {
     Game.drawToHand(Game.playerHand, 'p', false)
     Game.drawToHand(Game.playerHand, 'p', false)
     console.log(`You have drawn a ${Game.playerHand[0][0]} of ${Game.playerHand[0][1]} and a ${Game.playerHand[1][0]} of ${Game.playerHand[1][1]}. Your hand is worth ${Game.getHandValue(Game.playerHand)}.`)
-    console.log(`Will you "hit" or "stay"?`)
+    console.log(`Will you hit or stay?`)
   },
 
   //make all of these compressed (reuse) [or dont bc will have to modify DOMStrings]
@@ -135,14 +114,14 @@ let Game = {
   },
 
   playerBust: function(){
-    console.log(`You bust; you lose! Type "replay" to play again!`)
+    console.log(`You bust; you lose! Play again?`)
     document.getElementById('player').className += ' lose';
     document.getElementById('playerText').textContent = 'You bust!';
     Game.replayPrompt();
   },
 
   dealerBust: function(){
-    console.log(`Dealer bust; you win! Type "replay" to play again!`)
+    console.log(`Dealer bust; you win! Play again?`)
     document.getElementById('dealer').className += ' lose';
     document.getElementById('dealerText').textContent = 'Dealer busts!';
     Game.replayPrompt();
@@ -155,7 +134,7 @@ let Game = {
         Game.playerHit();
         console.log(`When you hit, you drew a ${Game.playerHand[(Game.playerHand.length - 1)][0]} of ${Game.playerHand[(Game.playerHand.length - 1)][1]}. Your hand is worth ${Game.getHandValue(Game.playerHand)}.`);
         if(Game.playerTestBust() == false){
-          console.log(`Will you "hit" or "stay"?`);
+          console.log(`Will you hit or stay?`);
           Game.playerTurn();
         } else {
           Game.playerBust();
@@ -263,7 +242,19 @@ Game.init();
 
 
 ////fix Game. to maybe nothing or this.
-///add case for natural blackjack
 //remove console logs & end funct
 //prettier
 //case for empty deck
+
+
+
+function getBMI(number) {
+  if (number > 20) {
+    return 'Overweight'
+  } else {
+    return 'okay'
+  }
+}
+
+
+console.log(getBMI(30))
