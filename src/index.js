@@ -10,8 +10,9 @@ let Deck = {
   addToDeck: function(suit, fileref) {
     //deck array guide:
     //0 index is card number (10, J, Q)
-    //1 index is suite (H, S, C)
-    //2 index is card value (1, 9, 10) [1 will be tried as both 1 and 11]
+    //1 index is suite (Hearts, Spades, Clubs)
+    //2 index is card value (1, 2, 3) [1 will be tried as both 1 and 11]
+    //3 index is image file location
     for (let i = 1; i < 14; i++) {
       if (i === 1) {
         Deck.deck.push(['Ace', suit, 1, Deck.getPath(fileref, 'a')])
@@ -67,7 +68,8 @@ let Game = {
         numAces++;
       }
     }
-    //occurs after so as to not prioritize aces over other cards (like having point total of 8, getting ace making it 19, and then busting after getting a 6)
+    //occurs after so as to not prioritize aces over other cards
+    //like having point total of 8, getting ace making it 19, and then busting after getting a 6
     while (numAces > 0) {
       if (acc < 12) {
         acc += 10;
@@ -94,8 +96,6 @@ let Game = {
     console.log(`You have drawn a ${Game.playerHand[0][0]} of ${Game.playerHand[0][1]} and a ${Game.playerHand[1][0]} of ${Game.playerHand[1][1]}. Your hand is worth ${Game.getHandValue(Game.playerHand)}.`)
     console.log(`Will you hit or stay?`)
   },
-
-  //make all of these compressed (reuse) [or dont bc will have to modify DOMStrings]
 
   playerHit: function(){
     Game.drawToHand(Game.playerHand, 'p', false)
@@ -129,19 +129,16 @@ let Game = {
 
   playerTurn: function(){
     document.getElementById('buttonsPlayerTurn').classList.remove('hidden');
-
     document.getElementById('hit').onclick = function() {
-        Game.playerHit();
-        console.log(`When you hit, you drew a ${Game.playerHand[(Game.playerHand.length - 1)][0]} of ${Game.playerHand[(Game.playerHand.length - 1)][1]}. Your hand is worth ${Game.getHandValue(Game.playerHand)}.`);
-        if(Game.playerTestBust() == false){
-          console.log(`Will you hit or stay?`);
-          Game.playerTurn();
-        } else {
-          Game.playerBust();
-        }
+      Game.playerHit();
+      console.log(`When you hit, you drew a ${Game.playerHand[(Game.playerHand.length - 1)][0]} of ${Game.playerHand[(Game.playerHand.length - 1)][1]}. Your hand is worth ${Game.getHandValue(Game.playerHand)}.`);
+      if(Game.playerTestBust() == false){
+        console.log(`Will you hit or stay?`);
+        Game.playerTurn();
+      } else {
+        Game.playerBust();
+      }
     }
-
-    
     document.getElementById('stay').onclick = function() {
       console.log(`You chose to stay. It's now the dealer's turn.`);
       Game.dealerTurn();
@@ -152,13 +149,9 @@ let Game = {
   dealerTurn: function(){
     document.getElementById('buttonsPlayerTurn').className += ' hidden';
     document.getElementById('buttonsDealerTurn').classList.remove('hidden');
-
     console.log(`The dealer currently has a ${Game.dealerHand[0][0]} of ${Game.dealerHand[0][1]} and a ${Game.dealerHand[1][0]} of ${Game.dealerHand[1][1]}. Their hand is worth ${Game.getHandValue(Game.dealerHand)}.`);
-    //reveal 2nd card
+    //reveal 2nd card that was originally hidden
     document.getElementById("d2").src = Game.dealerHand[1][3];
-
-
-
     document.getElementById('next').onclick = function() {
       if (Game.getHandValue(Game.dealerHand) < 17) {
         Game.dealerHit();
@@ -178,7 +171,7 @@ let Game = {
   },
 
   testWinner: function(){
-    //at this point, no player busts
+    //at this point, no player can bust
     console.log(`Since the dealer got ${Game.getHandValue(Game.dealerHand)} and you got ${Game.getHandValue(Game.playerHand)}...`)
     if (Game.getHandValue(Game.dealerHand) < Game.getHandValue(Game.playerHand)) {
       console.log(`You win!`)
@@ -210,16 +203,11 @@ let Game = {
     }
   },
 
-  end: function(){
-    //put a function here if required for cleanup
-  },
-
   init: function(){
     Deck.createDeck();
     Game.dealerDraw();
     Game.playerDraw();
     Game.playerTurn();
-    Game.end();
   }
 }
 
@@ -235,26 +223,9 @@ const Display = {
   }
 }
 
+
+//game entry point
 Game.init();
 
-
-//console.log(Deck.deck)
-
-
-////fix Game. to maybe nothing or this.
-//remove console logs & end funct
-//prettier
-//case for empty deck
-
-
-
-function getBMI(number) {
-  if (number > 20) {
-    return 'Overweight'
-  } else {
-    return 'okay'
-  }
-}
-
-
-console.log(getBMI(30))
+///todo:
+//fix buttons

@@ -46,11 +46,9 @@ body {
   color: white;
 }
 
-
-
-.nes-btn,
-.nes-btn:link,
-.nes-btn:visited {
+.btn,
+.btn:link,
+.btn:visited {
   text-transform: uppercase;
   text-decoration: none;
   padding: 1.5rem 4rem;
@@ -58,18 +56,18 @@ body {
   margin: 1rem;
   font-size: 5rem;
   border-radius: 1rem;
-  border-color: rebeccapurple;
+  border-color: burlywood;
   color: #4286f4;
   transition: all 0.2s;
-  background-color: oldlace;
+  background-color: whitesmoke;
 }
 
-.nes-btn:hover {
+.btn:hover {
   transform: translateY(-0.3rem);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0.2);
 }
 
-.nes-btn:active {
+.btn:active {
   transform: translateY(-1px);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0.2);
 }
@@ -88,18 +86,6 @@ body {
   margin-bottom: 10rem;
   margin-top: 10vh;
 }
-
-
-@media only screen and (max-width: 1080px) and (orientation: portrait) {
-  .bannerText {
-    font-size: 5vh;
-  }
-}
-
-
-
-/* replace buttons */
-
 
 .flexH {
   display: flex;
@@ -138,7 +124,7 @@ body {
 }
 
 .win{
-  background-color: green;
+  background-color: lightgreen;
 }
 
 .lose{
@@ -157,4 +143,11 @@ body {
 .cardImg:hover{
   transform: translateY(-1.5rem);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0.2);
+}
+
+
+@media only screen and (max-width: 1080px) and (orientation: portrait) {
+  .bannerText {
+    font-size: 5vh;
+  }
 }
