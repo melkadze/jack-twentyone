@@ -1,4 +1,4 @@
-//need let here for deck var
+//need let here for deck var; same for Game obj
 let Deck = {
   //Deck (capital) is object, deck (lowercase) is current deck var
   deck: [],
@@ -86,6 +86,7 @@ let Game = {
 
   dealerDraw: function(){
     Game.drawToHand(Game.dealerHand, 'd', false)
+    //second card needs to be hidden until dealer turn
     Game.drawToHand(Game.dealerHand, 'd', true)
     console.log(`The dealer has drawn a ${Game.dealerHand[0][0]} of ${Game.dealerHand[0][1]} and a second, hidden card.`)
   },
@@ -226,6 +227,3 @@ const Display = {
 
 //game entry point
 Game.init();
-
-///todo:
-//fix buttons
