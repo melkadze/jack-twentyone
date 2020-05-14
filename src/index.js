@@ -10,7 +10,7 @@ let Deck = {
   addToDeck: function(suit, fileref) {
     //deck array guide:
     //0 index is card number (10, J, Q)
-    //1 index is suite (Hearts, Spades, Clubs)
+    //1 index is suit (Hearts, Spades, Clubs)
     //2 index is card value (1, 2, 3) [1 will be tried as both 1 and 11]
     //3 index is image file location
     for (let i = 1; i < 14; i++) {
