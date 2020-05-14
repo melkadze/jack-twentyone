@@ -33,7 +33,7 @@ let Deck = {
   },
 
   createDeck: function() {
-    //first is display named, second is for filename ref
+    //first is display name, second is for filename ref
     Deck.addToDeck('Spades', 's');
     Deck.addToDeck('Clubs', 'c');
     Deck.addToDeck('Hearts', 'h');
@@ -86,7 +86,7 @@ let Game = {
 
   dealerDraw: function(){
     Game.drawToHand(Game.dealerHand, 'd', false)
-    //second card needs to be hidden until dealer turn
+    //second card needs to be hidden until dealer's turn
     Game.drawToHand(Game.dealerHand, 'd', true)
     console.log(`The dealer has drawn a ${Game.dealerHand[0][0]} of ${Game.dealerHand[0][1]} and a second, hidden card.`)
   },
